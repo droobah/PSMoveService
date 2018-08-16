@@ -26,10 +26,10 @@ if NOT DEFINED BOOST_ROOT_PATH (goto failure)
 del SetBuildVars_x64.bat
 echo @echo off >> SetBuildVars_x64.bat
 echo set BOOST_ROOT_PATH=%BOOST_ROOT_PATH% >> SetBuildVars_x64.bat
-echo set BOOST_LIB_PATH=%BOOST_ROOT_PATH%/lib64-msvc-14.0 >> SetBuildVars_x64.bat
+echo set BOOST_LIB_PATH=%BOOST_ROOT_PATH%/lib64-msvc-14.1 >> SetBuildVars_x64.bat
 
 :: Add MSVC build tools to the path
-call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
+call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" amd64
 IF %ERRORLEVEL% NEQ 0 (
   echo "Unable to initialize 64-bit visual studio build environment"
   goto failure
@@ -42,7 +42,7 @@ del /f /s /q vsprojects > nul
 rmdir /s /q vsprojects
 mkdir vsprojects
 pushd vsprojects
-cmake -G "Visual Studio 14 2015 Win64" -Dprotobuf_DEBUG_POSTFIX="" -Dprotobuf_BUILD_TESTS=OFF ../cmake
+cmake -G "Visual Studio 15 2017 Win64" -Dprotobuf_DEBUG_POSTFIX="" -Dprotobuf_BUILD_TESTS=OFF ../cmake
 IF %ERRORLEVEL% NEQ 0 (
   echo "Error generating protobuf project files!"
   goto failure
@@ -71,13 +71,13 @@ popd
 :: Compile the DEBUG|x64 and RELEASE|x64 builds of libusb
 pushd thirdparty\libusb\msvc\
 echo "Building libusb DEBUG|x64..."
-MSBuild.exe libusb_2015.sln /tv:14.0 /p:configuration=DEBUG /p:Platform="x64" /t:Clean;Build 
+MSBuild.exe libusb_2015.sln /tv:15.0 /p:configuration=DEBUG /p:Platform="x64" /t:Clean;Build 
 IF %ERRORLEVEL% NEQ 0 (
   echo "Error building libusb DEBUG|x64!"
   goto failure
 )
 echo "Building libusb RELEASE|x64..."
-MSBuild.exe libusb_2015.sln /tv:14.0 /p:configuration=RELEASE /p:Platform="x64" /t:Clean;Build
+MSBuild.exe libusb_2015.sln /tv:15.0 /p:configuration=RELEASE /p:Platform="x64" /t:Clean;Build
 IF %ERRORLEVEL% NEQ 0 (
   echo "Error building libusb RELEASE|x64!"
   goto failure
@@ -91,7 +91,7 @@ del /f /s /q build > nul
 rmdir /s /q build
 mkdir build
 pushd build
-cmake .. -G "Visual Studio 14 2015 Win64" -DDIRECTX=OFF -DDIRECTX=OFF -DSDL_STATIC=ON -DFORCE_STATIC_VCRT=ON -DEXTRA_CFLAGS="-MT -Z7 -DSDL_MAIN_HANDLED -DWIN32 -DNDEBUG -D_CRT_SECURE_NO_WARNINGS -DHAVE_LIBC -D_USE_MATH_DEFINES
+cmake .. -G "Visual Studio 15 2017 Win64" -DDIRECTX=OFF -DDIRECTX=OFF -DSDL_STATIC=ON -DFORCE_STATIC_VCRT=ON -DEXTRA_CFLAGS="-MT -Z7 -DSDL_MAIN_HANDLED -DWIN32 -DNDEBUG -D_CRT_SECURE_NO_WARNINGS -DHAVE_LIBC -D_USE_MATH_DEFINES
 IF %ERRORLEVEL% NEQ 0 (
   echo "Error generating SDL2 project files!"
   goto failure

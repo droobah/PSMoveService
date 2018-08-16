@@ -27,10 +27,10 @@ if NOT DEFINED BOOST_ROOT_PATH (goto failure)
 del SetBuildVars_Win32.bat
 echo @echo off >> SetBuildVars_Win32.bat
 echo set BOOST_ROOT_PATH=%BOOST_ROOT_PATH% >> SetBuildVars_Win32.bat
-echo set BOOST_LIB_PATH=%BOOST_ROOT_PATH%/lib32-msvc-14.0 >> SetBuildVars_Win32.bat
+echo set BOOST_LIB_PATH=%BOOST_ROOT_PATH%/lib32-msvc-14.1 >> SetBuildVars_Win32.bat
 
 :: Add MSVC build tools to the path
-call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86
+call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" x86
 IF %ERRORLEVEL% NEQ 0 (
   echo "Unable to initialize 32-bit visual studio build environment"
   goto failure
@@ -43,7 +43,7 @@ del /f /s /q vsprojects > nul
 rmdir /s /q vsprojects
 mkdir vsprojects
 pushd vsprojects
-cmake -G "Visual Studio 14 2015" -Dprotobuf_DEBUG_POSTFIX="" -Dprotobuf_BUILD_TESTS=OFF ../cmake
+cmake -G "Visual Studio 15 2017" -Dprotobuf_DEBUG_POSTFIX="" -Dprotobuf_BUILD_TESTS=OFF ../cmake
 echo "Building protobuf DEBUG|Win32"
 IF %ERRORLEVEL% NEQ 0 (
   echo "Error generating protobuf project files!"
@@ -86,7 +86,7 @@ del /f /s /q build > nul
 rmdir /s /q build
 mkdir build
 pushd build
-cmake .. -G "Visual Studio 14 2015" -DDIRECTX=OFF -DDIRECTX=OFF -DSDL_STATIC=ON -DFORCE_STATIC_VCRT=ON -DEXTRA_CFLAGS="-MT -Z7 -DSDL_MAIN_HANDLED -DWIN32 -DNDEBUG -D_CRT_SECURE_NO_WARNINGS -DHAVE_LIBC -D_USE_MATH_DEFINES
+cmake .. -G "Visual Studio 15 2017" -DDIRECTX=OFF -DDIRECTX=OFF -DSDL_STATIC=ON -DFORCE_STATIC_VCRT=ON -DEXTRA_CFLAGS="-MT -Z7 -DSDL_MAIN_HANDLED -DWIN32 -DNDEBUG -D_CRT_SECURE_NO_WARNINGS -DHAVE_LIBC -D_USE_MATH_DEFINES
 IF %ERRORLEVEL% NEQ 0 (
   echo "Error generating SDL2 project files!"
   goto failure

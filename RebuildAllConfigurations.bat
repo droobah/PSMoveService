@@ -21,7 +21,7 @@ IF %ERRORLEVEL% NEQ 0 (
 )
 
 :: Add MSVC build tools to the path
-call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86
+call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" x86
 IF %ERRORLEVEL% NEQ 0 (
   echo "Unable to initialize 32-bit visual studio build environment"
   goto failure
@@ -73,7 +73,7 @@ IF %ERRORLEVEL% NEQ 0 (
 )
 
 :: Add MSVC build tools to the path
-call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
+call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" amd64
 IF %ERRORLEVEL% NEQ 0 (
   echo "Unable to initialize 64-bit visual studio build environment"
   goto failure
