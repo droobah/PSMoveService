@@ -59,7 +59,7 @@ IF(NOT OpenCV_DIR)
           PREFIX ${ROOT_DIR}/deps/opencv
           GIT_REPOSITORY https://github.com/opencv/opencv.git
           GIT_SHALLOW 1
-          GIT_TAG 3.2.0
+          GIT_TAG 3.1.0
           CMAKE_GENERATOR ${gen}
           CMAKE_ARGS
             -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
