@@ -59,7 +59,7 @@ IF(NOT OpenCV_DIR)
           PREFIX ${ROOT_DIR}/deps/opencv
           GIT_REPOSITORY https://github.com/opencv/opencv.git
           GIT_SHALLOW 1
-          GIT_TAG 3.1.0
+          GIT_TAG 3.2.0
           CMAKE_GENERATOR ${gen}
           CMAKE_ARGS
             -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
@@ -105,7 +105,7 @@ IF(NOT OpenCV_DIR)
         endif()
 
         foreach(__CVLIB core calib3d features2d flann imgproc imgcodecs ml highgui objdetect video videoio)
-            set(OpenCV_${__CVLIB}_LIBRARY debug ${OPENCV_LIBS_DIR}/opencv_${__CVLIB}310d.lib optimized ${OPENCV_LIBS_DIR}/opencv_${__CVLIB}310.lib CACHE STRING "" FORCE)
+            set(OpenCV_${__CVLIB}_LIBRARY debug ${OPENCV_LIBS_DIR}/opencv_${__CVLIB}320d.lib optimized ${OPENCV_LIBS_DIR}/opencv_${__CVLIB}320.lib CACHE STRING "" FORCE)
             set(OpenCV_LIBS ${OpenCV_LIBS} ${OpenCV_${__CVLIB}_LIBRARY})
         endforeach(__CVLIB)    
 
